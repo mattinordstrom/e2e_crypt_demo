@@ -1,0 +1,14 @@
+body {
+	font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    background-color: #f7f5f0;
+	color: #333333;
+    width: 794px;
+}
+
+
+.container {
+    height: 100px;
+    min-width: 500px;
+}
+
