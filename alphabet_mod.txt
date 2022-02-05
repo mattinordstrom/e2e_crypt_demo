@@ -1,0 +1,56 @@
+1: a
+2: b
+3: c
+4: d
+5: e
+6: f
+7: g
+8: h
+9: i
+10: j
+11: k
+12: l
+13: m
+14: n
+15: o
+16: p
+17: q
+18: r
+19: s
+20: t
+21: u
+22: v
+23: w
+24: x
+25: y
+26: z
+
+
+Number of letters in the alphabet: 26
+
+------------------------
+JAVASCRIPT EXAMPLE:
+Shared secret key: 23
+
+"h"  "i"
+8    9
++23
+(31 and 32 without modulus)
+
+------------------------
+
+ALICE:
+Encrypt first letter: (8 + 23) % 26 = 5
+Encrypt second letter: (9 + 23) % 26 = 6
+
+5   6
+"e" "f" (encrypted string)
+
+
+BOB:
+Decrypt first letter: (((5 - 23)%26)+26) % 26 = 8
+Decrypt second letter: (((6 - 23)%26)+26) % 26 = 9
+
+8   9
+"h" "i" (decrypted string)
+

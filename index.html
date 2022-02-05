@@ -7,14 +7,15 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
 		<link href='https://fonts.googleapis.com/css?family=Festive' rel='stylesheet'>
 		<link href="style.css" rel="stylesheet" type="text/css"/>
-		<script src="main.js"></script> 
+		<script src="src/main.js"></script> 
+		<script src="src/messagehandler.js"></script> 
 	</head>
 
 	<body onload="init()">
 		<h1>End-to-end encryption demo (Diffie-Hellman)</h1>
 		<button onclick="example1()">Example 1</button>
 		<button onclick="example2()">Example 2</button>
-		<button>Signature example (RSA)</button>
+		<button disabled>Signature example (RSA)</button>
 		<div id="page_title"></div>
 		<br /><br />
 		<div style="display:flex;">
@@ -64,7 +65,8 @@
 					<td style="border: none">
 					</td>
 					<td class="containerTD" style="height:180px">
-						<span style="font-weight: bold; color: red;">EVIL HACKER</span>
+						<span style="font-weight: bold; color: red;">EVIL HACKER</span><br /><br />
+						Know about the created public keys and how the algoritm works.<br /><br />
 					</td>
 					<td style="border: none">
 					</td>
@@ -74,9 +76,9 @@
 						<span style="font-weight: bold;">ALICE</span><br /><br />
 						&#128273; Alices private key<br /><br />
 						<br /><br /><br /><br /><br /><br />
-						<i>Bananas are yellow</i>
+						<i><span id="alices_message">Bananas are yellow</span></i>
 						<br />
-						<div><button>Send message to Bob -></button></div>
+						<div><button onclick="sendToBob()">Send message to Bob -></button></div>
 					</td>
 					<td class="containerTD" style="background-color:rgb(204, 209, 233)">
 						<span style="font-weight: bold;">PUBLIC</span><br /><br />
@@ -89,9 +91,9 @@
 						<span style="font-weight: bold;">BOB</span><br /><br />
 						&#128273; Bobs private key<br /><br />
 						<br /><br /><br /><br /><br /><br />
-						<i>An apple can be red</i>
+						<i><span id="bobs_message">An apple can be red</span></i>
 						<br />
-						<div><button><- Send message to Alice</button></div>
+						<div><button onclick="sendToAlice()"><- Send message to Alice</button></div>
 					</td>
 				</tr>
 			</table>
