@@ -1,4 +1,4 @@
-function init(numbersToUse) {
+function setupExample(pageTitle, numbersToUse) {
   if(!numbersToUse) {
     numbersToUse = {
       nNumber: 13,
@@ -13,26 +13,53 @@ function init(numbersToUse) {
   const alicePrivateNumber = numbersToUse.alicePrivateNumber;
   const bobPrivateNumber = numbersToUse.bobPrivateNumber;
 
-  
-/*
-  nNumber += Math.floor(Math.random() * 9) + 1; //random integer from 1 to 9:
-  for(let i = 0; i < 4; i++) {
-    nNumber += Math.floor(Math.random() * 10); //random integer from 0 to 9:
-  }
-  nNumber = Number(nNumber);
-*/
-
   let alicePubKey = Math.pow(generatorNumber, alicePrivateNumber) % nNumber;
   let bobPubKey = Math.pow(generatorNumber, bobPrivateNumber) % nNumber;
 
-  let aliceResult = Math.pow(bobPubKey, alicePrivateNumber) % nNumber;
-  let bobResult = Math.pow(alicePubKey, bobPrivateNumber) % nNumber;
+  let aliceResult = (BigInt(bobPubKey) ** BigInt(alicePrivateNumber) - 1n) % BigInt(nNumber);
+  let bobResult = (BigInt(alicePubKey) ** BigInt(bobPrivateNumber) - 1n) % BigInt(nNumber);
 
-  $( ".container" ).html('N: ' + nNumber + '<br/><br/>g: ' + generatorNumber +
+  $( ".container" ).html('<h1>'+pageTitle + '</h1><br/>N: ' + nNumber + '<br/><br/>g: ' + generatorNumber +
     '<br/><br/><hr/>Alice private key: ' + (alicePrivateNumber)+'<br/><br/>Bob private key: ' + (bobPrivateNumber) +
     '<br/><br/><hr/>Alice public key: ' + (alicePubKey)+'<br/><br/>Bob public key: ' + (bobPubKey) +
-    '<br/><br/><hr/>aliceResult: ' + (aliceResult) + '<br/><br/>bobResult: ' + (bobResult));
+    '<br/><br/><hr/><b>aliceResult: ' + (aliceResult) + '<br/><br/>bobResult: ' + (bobResult) + '</b>'
+    );
 }
 
+function example1() {
+  setUrlPageParam(1);
 
-//BIGINT (27576n ** 15n - 1n) % 95779
+  setupExample("Example 1");
+}
+
+function example2() {
+  setUrlPageParam(2);
+
+  const numbersToUse = {
+    nNumber: 95779,
+    generatorNumber: 7,
+    alicePrivateNumber: 15,
+    bobPrivateNumber: 13
+  };
+
+  setupExample("Example 2", numbersToUse);
+}
+
+function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const page = urlParams.get('page');
+
+  if(page == 2) {
+    example2();
+    return;
+  }
+
+  example1();
+}
+
+function setUrlPageParam(page) {
+  if (history.pushState) {
+    var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?page='+page;
+    window.history.pushState({path:newurl},'',newurl);
+  }
+}
