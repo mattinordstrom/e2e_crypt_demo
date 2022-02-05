@@ -14,9 +14,9 @@ function setupExample(pageTitle, numbersToUse) {
   $( "#public_n_g" ).html('N: ' + nNumber + '<i> (prime number)</i><br/><br/>g: ' + generatorNumber + '<i> (generator)</i>' + '<br/><br/><br/>');
   $( "#private_keys" ).html('&#128273; Alice private key: ' + alicePrivateNumber + '<br/><br/>&#128273; Bob private key: ' + bobPrivateNumber + '<br/><br/><br/>');
   $( "#created_pub_keys" ).html('Alice public key: ' + alicePubKey + '<br/>Bob public key: ' + bobPubKey + '<br/><br/>'+
-    '<i>Alice: 5<sup>22</sup> % 95273</i><br/>' + '<i>Bob: 5<sup>4</sup> % 95273</i>');
-  $( "#shared_secret" ).html('<b>Alice result: ' + aliceResult + '<br/>Bob result: ' + bobResult + '</b><br/><br/>' + 
-    '<i>Alice: 625<sup>22</sup> % 95273</i><br/>' + '<i>Bob: 7473<sup>4</sup> % 95273</i>');
+    '<i>Alice: '+generatorNumber+'<sup>'+alicePrivateNumber+'</sup> % '+nNumber+'</i><br/>' + '<i>Bob: '+generatorNumber+'<sup>'+bobPrivateNumber+'</sup> % '+nNumber+'</i>');
+  $( "#shared_secret" ).html('<b>Alice result: <span id="alice_shared_secret_value">' + aliceResult + '</span><br/>Bob result: <span id="bob_shared_secret_value">' + bobResult + '</span></b><br/><br/>' + 
+    '<i>Alice: '+bobPubKey+'<sup>'+alicePrivateNumber+'</sup> % '+nNumber+'</i><br/>' + '<i>Bob: '+alicePubKey+'<sup>'+bobPrivateNumber+'</sup> % '+nNumber+'</i>');
 }
 
 function example1() {
@@ -36,10 +36,10 @@ function example2() {
   setUrlPageParam(2);
 
   const numbersToUse = {
-    nNumber: 13, //prime number
+    nNumber: 17, //prime number
     generatorNumber: 7,
     alicePrivateNumber: 15,
-    bobPrivateNumber: 13
+    bobPrivateNumber: 12
   };
 
   setupExample("Example 2", numbersToUse);

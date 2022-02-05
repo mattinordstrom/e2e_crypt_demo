@@ -28,8 +28,9 @@
 
 Number of letters in the alphabet: 26
 
-------------------------
-JAVASCRIPT EXAMPLE:
+----------------------------
+::::EXAMPLE::::
+
 Shared secret key: 23
 
 "h"  "i"
@@ -37,7 +38,7 @@ Shared secret key: 23
 +23
 (31 and 32 without modulus)
 
-------------------------
+-----------
 
 ALICE:
 Encrypt first letter: (8 + 23) % 26 = 5

@@ -15,7 +15,7 @@
 		<h1>End-to-end encryption demo (Diffie-Hellman)</h1>
 		<button onclick="example1()">Example 1</button>
 		<button onclick="example2()">Example 2</button>
-		<button disabled>Signature example (RSA)</button>
+		<button disabled>Signature example (RSA)</button> <!-- Man in the middle -->
 		<div id="page_title"></div>
 		<br /><br />
 		<div style="display:flex;">
@@ -66,7 +66,11 @@
 					</td>
 					<td class="containerTD" style="height:180px">
 						<span style="font-weight: bold; color: red;">EVIL HACKER</span><br /><br />
-						Know about the created public keys and how the algoritm works.<br /><br />
+						<ul>
+							<li>Knows the created public keys</li>
+							<li>Knows how the algoritm works</li>
+						</ul>
+						<br /><br />
 					</td>
 					<td style="border: none">
 					</td>
@@ -74,7 +78,10 @@
 				<tr>
 					<td class="containerTD">
 						<span style="font-weight: bold;">ALICE</span><br /><br />
-						&#128273; Alices private key<br /><br />
+						<ul>
+							<li>&#128273; Alices private key</li>
+							<li>SHARED SECRET</li>
+						</ul>
 						<br /><br /><br /><br /><br /><br />
 						<i><span id="alices_message">Bananas are yellow</span></i>
 						<br />
@@ -82,14 +89,19 @@
 					</td>
 					<td class="containerTD" style="background-color:rgb(204, 209, 233)">
 						<span style="font-weight: bold;">PUBLIC</span><br /><br />
-						N<br /><br />
-						g<br /><br />
-						Alices created key<br /><br />
-						Bobs created key<br /><br />
+						<ul>
+							<li>N</li>
+							<li>g</li>
+							<li>Alices created key</li>
+							<li>Bobs created key</li>
+						</ul>
 					</td>
 					<td class="containerTD">
 						<span style="font-weight: bold;">BOB</span><br /><br />
-						&#128273; Bobs private key<br /><br />
+						<ul>
+							<li>&#128273; Bobs private key</li>
+							<li>SHARED SECRET</li>
+						</ul>
 						<br /><br /><br /><br /><br /><br />
 						<i><span id="bobs_message">An apple can be red</span></i>
 						<br />
@@ -97,6 +109,10 @@
 					</td>
 				</tr>
 			</table>
+			<br /><br />
+			<b>Algoritm for this example:</b> Simple, to encrypt a string take the letter position plus the shared secret value. To decrypt take the position minus the shared secret value. Modulus 26 (number of letters in the alphabet)
+			<a href="alphabet_mod.txt" target="_blank">Example</a>
+			<br/><br/>
 		</div>
 	</body>
 </html>
