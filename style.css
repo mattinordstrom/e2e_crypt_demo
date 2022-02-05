@@ -1,14 +1,37 @@
 body {
 	font-family: 'Arial', sans-serif;
     font-size: 12px;
-    background-color: #f7f5f0;
-	color: #333333;
+    background-color: #f3eee0;
+	color: #000000;
     width: 794px;
 }
 
+table, th, td {
+    border: 2px solid rgb(75, 75, 75);
+    font-size: 14px;
+}
+th {
+    background-color:rgb(233, 233, 233);
+}
+th, td {
+    padding: 6px;
+    border: 1px solid black;
+}
+
+i {
+ font-size: 12px;
+ color: #666666;
+}
 
 .container {
     height: 100px;
     min-width: 500px;
+    margin-left: 50px;
 }
 
+.containerTD {
+    width: 200px; 
+    height: 250px; 
+    vertical-align: top; 
+    text-align: center;
+}

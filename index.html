@@ -11,9 +11,90 @@
 	</head>
 
 	<body onload="init()">
+		<h1>End-to-end encryption demo (Diffie-Hellman)</h1>
 		<button onclick="example1()">Example 1</button>
 		<button onclick="example2()">Example 2</button>
+		<button>Signature example (RSA)</button>
+		<div id="page_title"></div>
+		<br /><br />
+		<div style="display:flex;">
+			<table width="400">
+				<tr>
+					<th width="50%">
+						Public values
+					</th>
+					<th>
+						<span style="color: rgb(214, 82, 82);">Private keys</span>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<div id="public_n_g"></div>
+					</td>
+					<td>
+						<div id="private_keys"></div>
+					</td>
+				</tr>
+			</table>
+			&nbsp;&nbsp;
+			<table width="400">
+				<tr>
+					<th width="50%">
+						Created public keys
+					</th>
+					<th>
+						<span style="color: rgb(214, 82, 82);">SHARED SECRET</span>
+					</th>
+				</tr>
+				
+				<tr>
+					<td>
+						<div id="created_pub_keys"></div>
+					</td>
+					<td>
+						<div id="shared_secret"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br /><hr /><br /> 
 		<div class="container">
+			<table style="border: none">
+				<tr>
+					<td style="border: none">
+					</td>
+					<td class="containerTD" style="height:180px">
+						<span style="font-weight: bold; color: red;">EVIL HACKER</span>
+					</td>
+					<td style="border: none">
+					</td>
+				</tr>
+				<tr>
+					<td class="containerTD">
+						<span style="font-weight: bold;">ALICE</span><br /><br />
+						&#128273; Alices private key<br /><br />
+						<br /><br /><br /><br /><br /><br />
+						<i>Bananas are yellow</i>
+						<br />
+						<div><button>Send message to Bob -></button></div>
+					</td>
+					<td class="containerTD" style="background-color:rgb(204, 209, 233)">
+						<span style="font-weight: bold;">PUBLIC</span><br /><br />
+						N<br /><br />
+						g<br /><br />
+						Alices created key<br /><br />
+						Bobs created key<br /><br />
+					</td>
+					<td class="containerTD">
+						<span style="font-weight: bold;">BOB</span><br /><br />
+						&#128273; Bobs private key<br /><br />
+						<br /><br /><br /><br /><br /><br />
+						<i>An apple can be red</i>
+						<br />
+						<div><button><- Send message to Alice</button></div>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</body>
 </html>
