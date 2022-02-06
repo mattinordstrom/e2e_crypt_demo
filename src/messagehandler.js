@@ -1,19 +1,46 @@
+var alphabetStringInclSpace = 'abcdefghijklmnopqrstuvwxyz ';
+
 function sendToAlice() {
   const rawMessageToSend = $( "#bobs_message" ).text();
-  console.log("sendToAlice: " + rawMessageToSend);
-
   const sharedSecretValue = $( "#bob_shared_secret_value" ).text();
-  console.log("shared secret: " + sharedSecretValue);
+  const messageContainerID = "bobs_message_container";
 
-  //TODO encrypt
+  encryptAndDecrypt(rawMessageToSend, sharedSecretValue, messageContainerID);
 }
 
 function sendToBob() {
   const rawMessageToSend = $( "#alices_message" ).text();
-  console.log("sendToBob: " + rawMessageToSend);
-
   const sharedSecretValue = $( "#alice_shared_secret_value" ).text();
-  console.log("shared secret: " + sharedSecretValue);
+  const messageContainerID = "alices_message_container";
 
-  //TODO encrypt
+  encryptAndDecrypt(rawMessageToSend, sharedSecretValue, messageContainerID);
+}
+
+function encryptAndDecrypt(rawMessageToSend, sharedSecretValue, messageContainerID) {
+  //ENCRYPT
+  let encryptedCharArray = [];
+  for(let i=0; i<rawMessageToSend.length; i++) {
+    const charAlphabetIdx = alphabetStringInclSpace.indexOf(rawMessageToSend[i]);
+    const encryptedCharPosition = (Number(charAlphabetIdx) + Number(sharedSecretValue)) % alphabetStringInclSpace.length;
+    encryptedCharArray.push(alphabetStringInclSpace[encryptedCharPosition]);
+  }
+  //console.log(encryptedCharArray);
+
+  //DECRYPT
+  let decryptedCharArray = [];
+  for(i=0; i<encryptedCharArray.length; i++) {
+    const charAlphabetIdx = alphabetStringInclSpace.indexOf(encryptedCharArray[i]);
+    const decryptedCharPosition = (((charAlphabetIdx - Number(sharedSecretValue)) % alphabetStringInclSpace.length) + alphabetStringInclSpace.length) % alphabetStringInclSpace.length;
+    decryptedCharArray.push(alphabetStringInclSpace[decryptedCharPosition]);
+  }
+  //console.log(decryptedCharArray);
+
+  $( "#"+messageContainerID+"" ).html('<b>'+decryptedCharArray.join('') + '</b><br />&#8679;<br />' + encryptedCharArray.join(''));
+  $( "#hacker_message_container" ).html('<span style="color:red">FAIL! Message intercepted but could not be decrypted. Shared secret is missing!</span>' + '</b><br />&#8679;<br />' + encryptedCharArray.join(''));
+}
+
+function resetMessages() {
+  $( "#hacker_message_container" ).html('');
+  $( "#bobs_message_container" ).html('');
+  $( "#alices_message_container" ).html('');
 }

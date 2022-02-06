@@ -20,6 +20,7 @@ function setupExample(pageTitle, numbersToUse) {
 }
 
 function example1() {
+  resetMessages();
   setUrlPageParam(1);
 
   const numbersToUse = {
@@ -33,6 +34,7 @@ function example1() {
 }
 
 function example2() {
+  resetMessages();
   setUrlPageParam(2);
 
   const numbersToUse = {

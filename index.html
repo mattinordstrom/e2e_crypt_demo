@@ -70,7 +70,8 @@
 							<li>Knows the created public keys</li>
 							<li>Knows how the algoritm works</li>
 						</ul>
-						<br /><br />
+						<br />
+						<div id="hacker_message_container" class="message_container"></div>
 					</td>
 					<td style="border: none">
 					</td>
@@ -82,8 +83,9 @@
 							<li>&#128273; Alices private key</li>
 							<li>SHARED SECRET</li>
 						</ul>
-						<br /><br /><br /><br /><br /><br />
-						<i><span id="alices_message">Bananas are yellow</span></i>
+						<div id="bobs_message_container" class="message_container"></div>
+						<br /><br />
+						<i><span id="alices_message">bananas are yellow</span></i>
 						<br />
 						<div><button onclick="sendToBob()">Send message to Bob -></button></div>
 					</td>
@@ -102,8 +104,9 @@
 							<li>&#128273; Bobs private key</li>
 							<li>SHARED SECRET</li>
 						</ul>
-						<br /><br /><br /><br /><br /><br />
-						<i><span id="bobs_message">An apple can be red</span></i>
+						<div id="alices_message_container" class="message_container"></div>
+						<br /><br />
+						<i><span id="bobs_message">an apple can be red</span></i>
 						<br />
 						<div><button onclick="sendToAlice()"><- Send message to Alice</button></div>
 					</td>
