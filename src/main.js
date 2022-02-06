@@ -4,11 +4,11 @@ function setupExample(pageTitle, numbersToUse) {
   const alicePrivateNumber = numbersToUse.alicePrivateNumber;
   const bobPrivateNumber = numbersToUse.bobPrivateNumber;
 
-  let alicePubKey = Math.pow(generatorNumber, alicePrivateNumber) % nNumber;
-  let bobPubKey = Math.pow(generatorNumber, bobPrivateNumber) % nNumber;
+  let alicePubKey = (generatorNumber ** alicePrivateNumber) % nNumber;
+  let bobPubKey = (generatorNumber ** bobPrivateNumber) % nNumber;
 
-  let aliceResult = (BigInt(bobPubKey) ** BigInt(alicePrivateNumber) - 1n) % BigInt(nNumber);
-  let bobResult = (BigInt(alicePubKey) ** BigInt(bobPrivateNumber) - 1n) % BigInt(nNumber);
+  let aliceResult = (BigInt(bobPubKey) ** BigInt(alicePrivateNumber)) % BigInt(nNumber);
+  let bobResult = (BigInt(alicePubKey) ** BigInt(bobPrivateNumber)) % BigInt(nNumber);
 
   $( "#page_title" ).html('<h2>' + pageTitle + '</h2>');
   $( "#public_n_g" ).html('N: ' + nNumber + '<i> (prime number)</i><br/><br/>g: ' + generatorNumber + '<i> (generator)</i>' + '<br/><br/><br/>');
@@ -45,6 +45,12 @@ function example2() {
   };
 
   setupExample("Example 2", numbersToUse);
+}
+
+function exampleCustom(numbersToUse) {
+  // { nNumber: 19, generatorNumber: 9, alicePrivateNumber: 12, bobPrivateNumber: 17 }
+  resetMessages();
+  setupExample("Example custom", numbersToUse);
 }
 
 function init() {
