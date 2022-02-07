@@ -35,7 +35,7 @@ function encryptAndDecrypt(rawMessageToSend, sharedSecretValue, messageContainer
   }
   //console.log(decryptedCharArray);
 
-  $( "#"+messageContainerID+"" ).html('<b>'+decryptedCharArray.join('') + '</b><br />&#8679;<br />' + encryptedCharArray.join(''));
+  $( "#"+messageContainerID+"" ).html('<br /><br /><b>'+decryptedCharArray.join('') + '</b><br />&#8679;<br />' + encryptedCharArray.join(''));
   $( "#hacker_message_container" ).html('<span style="color:red">FAIL! Message intercepted but could not be decrypted. Shared secret is missing!</span>' + '</b><br />&#8679;<br />' + encryptedCharArray.join(''));
 }
 
