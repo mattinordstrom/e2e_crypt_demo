@@ -6,6 +6,10 @@ body {
     width: 794px;
 }
 
+#page_title {
+    color: blue;
+}
+
 table, th, td {
     border: 2px solid rgb(75, 75, 75);
     font-size: 14px;

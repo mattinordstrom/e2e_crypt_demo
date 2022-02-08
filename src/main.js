@@ -20,7 +20,7 @@ function setupExample(pageTitle, numbersToUse) {
 }
 
 function example1() {
-  resetMessages();
+  resetPage();
   setUrlPageParam(1);
 
   const numbersToUse = {
@@ -34,7 +34,7 @@ function example1() {
 }
 
 function example2() {
-  resetMessages();
+  resetPage();
   setUrlPageParam(2);
 
   const numbersToUse = {
@@ -49,8 +49,31 @@ function example2() {
 
 function exampleCustom(numbersToUse) {
   // { nNumber: 19, generatorNumber: 9, alicePrivateNumber: 12, bobPrivateNumber: 17 }
-  resetMessages();
+  resetPage();
   setupExample("Example custom", numbersToUse);
+}
+
+function mitm() {
+  setUrlPageParam(3);
+  resetPage(true);
+
+  const nNumber = 17, generatorNumber = 7, alicePrivateNumber = 15, bobPrivateNumber = 12, hackerPrivateNumber = 14;
+  
+  let alicePubKey = (generatorNumber ** alicePrivateNumber) % nNumber;
+  let bobPubKey = (generatorNumber ** bobPrivateNumber) % nNumber;
+  let hackerPubKey = (generatorNumber ** hackerPrivateNumber) % nNumber;
+
+  let aliceHackerResult = (BigInt(hackerPubKey) ** BigInt(alicePrivateNumber)) % BigInt(nNumber);
+  let hackerAliceResult = (BigInt(alicePubKey) ** BigInt(hackerPrivateNumber)) % BigInt(nNumber);
+  let bobHackerResult = (BigInt(hackerPubKey) ** BigInt(bobPrivateNumber)) % BigInt(nNumber);
+  let hackerBobResult = (BigInt(bobPubKey) ** BigInt(hackerPrivateNumber)) % BigInt(nNumber);
+
+  $( "#page_title" ).html('<h2>Man-in-the-middle example</h2>');
+  $( "#public_n_g" ).html('N: ' + nNumber + '<i> (prime number)</i><br/><br/>g: ' + generatorNumber + '<i> (generator)</i>' + '<br/><br/><br/>');
+  $( "#private_keys" ).html('&#128273; Alice private key: ' + alicePrivateNumber + '<br/><br/>&#128273; Bob private key: ' + bobPrivateNumber  + '<br/><br/>&#128273; Hacker private key: ' + hackerPrivateNumber + '<br/>');
+  $( "#created_pub_keys" ).html('Alice public key: ' + alicePubKey + '<br/>Bob public key: ' + bobPubKey + '<br/>'+ 'Hacker public key: ' + hackerPubKey + '<br /><br /><br />');
+  $( "#shared_secret" ).html('<b>Alice -> Hacker: <span id="alice_hacker_shared_secret_value">' + aliceHackerResult + '</span><br/>Hacker -> Alice: <span>' + hackerAliceResult + '</span><br/>'+
+    '<br/>Bob -> Hacker: <span id="bob_hacker_shared_secret_value">' + bobHackerResult + '</span><br/>Hacker -> Bob: <span>' + hackerBobResult + '</span></b><br/><br/>');
 }
 
 function init() {
@@ -59,6 +82,9 @@ function init() {
 
   if(page == 2) {
     example2();
+    return;
+  } else if (page == 3) {
+    mitm();
     return;
   }
 

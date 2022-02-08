@@ -15,6 +15,8 @@
 		<h1>End-to-end key exchange demo (Diffie-Hellman)</h1>
 		<button onclick="example1()">Example 1</button>
 		<button onclick="example2()">Example 2</button>
+		<button onclick="mitm()">MITM</button>
+		<button onclick="mitmprevent()" disabled>MITM prevent</button>
 		<div id="page_title"></div>
 		<br /><br />
 		<div style="display:flex;">
@@ -65,10 +67,12 @@
 					</td>
 					<td class="containerTD" style="height:180px">
 						<span style="font-weight: bold; color: red;">EVIL HACKER</span><br /><br />
-						<ul>
-							<li>Knows the created public keys</li>
-							<li>Knows how the algoritm works</li>
-						</ul>
+						<div id="hacker_knowledge_info">
+							<ul>
+								<li>Knows the created public keys</li>
+								<li>Knows how the algoritm works</li>
+							</ul>
+						</div>
 						<br />
 						<div id="hacker_message_container" class="message_container"></div>
 					</td>
@@ -93,6 +97,7 @@
 						<ul>
 							<li>N</li>
 							<li>g</li>
+							<br />
 							<li>Alices created key</li>
 							<li>Bobs created key</li>
 						</ul>
