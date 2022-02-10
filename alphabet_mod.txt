@@ -24,34 +24,44 @@
 23: x
 24: y
 25: z
-26: <space>
+26: 0
+27: 1
+28: 2
+29: 3
+30: 4
+31: 5
+32: 6
+33: 7
+34: 8
+35: 9
+36: <space>
 
 
-Number of letters in the alphabet string (incl space): 27
+Number of letters in the alphabet string (incl numbers and space): 37
 
 ----------------------------
 ::::EXAMPLE::::
 
-Shared secret key: 23
+Shared secret key: 33
 
 "h"  "i"
 7    8
-+23
-(30 and 31 without modulus)
++33
+(40 and 41 without modulus)
 
 -----------
 
 ALICE:
-Encrypt first letter: (7 + 23) % 27 = 3
-Encrypt second letter: (8 + 23) % 27 = 4
+Encrypt first letter: (7 + 33) % 37 = 3
+Encrypt second letter: (8 + 33) % 37 = 4
 
 3   4
 "d" "e" (encrypted string)
 
 
 BOB:
-Decrypt first letter: (((3 - 23)%27)+27) % 27 = 7
-Decrypt second letter: (((4 - 23)%27)+27) % 27 = 8
+Decrypt first letter: (((3 - 33) % 37) + 37) % 37 = 7
+Decrypt second letter: (((4 - 33) % 37) + 37) % 37 = 8
 
 7   8
 "h" "i" (decrypted string)
