@@ -92,8 +92,8 @@ function mitmInfoSetup() {
   let bobResult = (BigInt(alicePubKey) ** BigInt(bobPrivateNumber)) % BigInt(nNumber);
 
   $( "#public_n_g" ).html('N: ' + nNumber + '<i> (prime number)</i><br/><br/>g: ' + generatorNumber + '<i> (generator)</i>' + '<br/><br/><br/>');
-  $( "#private_keys" ).html('&#128273; Alice private key: ' + alicePrivateNumber + '<br/><br/>&#128273; Bob private key: ' + bobPrivateNumber  + '<br/><br/>&#128273; Hacker private key: ' + hackerPrivateNumber + '<br/>');
-  $( "#created_pub_keys" ).html('Alice public key: ' + alicePubKey + '<br/>Bob public key: ' + bobPubKey + '<br/>'+ 'Hacker public key: ' + hackerPubKey + '<br /><br /><br />');
+  $( "#private_keys" ).html('&#128273; Alice private key: ' + alicePrivateNumber + '<br/><br/>&#128273; Bob private key: ' + bobPrivateNumber  + '<br/><br/>(&#128273; Hacker private key: ' + hackerPrivateNumber + ')<br/>');
+  $( "#created_pub_keys" ).html('Alice public key: ' + alicePubKey + '<br/>Bob public key: ' + bobPubKey + '<br/>'+ '(Hacker public key: ' + hackerPubKey + ')<br /><br /><br />');
   $( "#shared_secret" ).html('<b>Alice -> Hacker: <span id="alice_hacker_shared_secret_value">' + aliceHackerResult + '</span><br/>Hacker -> Alice: <span>' + hackerAliceResult + '</span><br/>'+
     '<br/>Bob -> Hacker: <span id="bob_hacker_shared_secret_value">' + bobHackerResult + '</span><br/>Hacker -> Bob: <span>' + hackerBobResult + '</span></b><br/><br/>'+
     'Bob <-> Alice would have been '+bobResult+' (but never used)<br/>');
@@ -119,8 +119,9 @@ function init() {
 
 function resetPage(mitm, mitmprevent) {
   $( "#hacker_message_container" ).html('');
-  $( "#bobs_message_container" ).html('');
-  $( "#alices_message_container" ).html('');
+  $( "#alices_output" ).html('');
+  $( "#bobs_output" ).html('');
+  $( "#bob_extra" ).html('');
 
   if(mitm) {
     $( "#hacker_knowledge_info" ).html('<ul><li>SHARED SECRET with Alice</li><li>SHARED SECRET with Bob</li></ul>');
@@ -129,12 +130,18 @@ function resetPage(mitm, mitmprevent) {
   }
 
   if(mitmprevent) {
+    $( "#algoritm_info" ).hide();
+    $( "#public_info" ).html('<ul><li>N</li><li>g</li><br /><li>Alices created key</li><li>Bobs created key</li><li>SHA256 is used</li><li>String "whatever"</li></ul>');
+
     $( "#send_to_bob" ).html('<button onclick="connectToBob()">Connect to Bob -></button>');
     $( "#send_to_alice" ).html('<button disabled>-----------</button>');
 
     $( "#alices_message" ).html('whatever');
     $( "#bobs_message" ).html('');
   } else {
+    $( "#algoritm_info" ).show();
+    $( "#public_info" ).html('<ul><li>N</li><li>g</li><br /><li>Alices created key</li><li>Bobs created key</li></ul>');
+
     $( "#send_to_bob" ).html('<button onclick="sendToBob()">Send message to Bob -></button>');
     $( "#send_to_alice" ).html('<button onclick="sendToAlice()"><- Send message to Alice</button>');
 

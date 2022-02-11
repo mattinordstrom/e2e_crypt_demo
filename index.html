@@ -77,6 +77,8 @@
 					</td>
 					<td style="border: none">
 					</td>
+					<td style="border: none">
+					</td>
 				</tr>
 				<tr>
 					<td class="containerTD">
@@ -85,7 +87,7 @@
 							<li>&#128273; Alices private key</li>
 							<li>SHARED SECRET</li>
 						</ul>
-						<div id="bobs_message_container" class="message_container"></div>
+						<div id="alices_output" class="message_container"></div>
 						<br /><br />
 						<i><span id="alices_message"></span></i>
 						<br />
@@ -93,13 +95,8 @@
 					</td>
 					<td class="containerTD" style="background-color:rgb(204, 209, 233)">
 						<span style="font-weight: bold;">PUBLIC</span><br /><br />
-						<ul>
-							<li>N</li>
-							<li>g</li>
-							<br />
-							<li>Alices created key</li>
-							<li>Bobs created key</li>
-						</ul>
+						<div id="public_info"></div>
+						
 					</td>
 					<td class="containerTD">
 						<span style="font-weight: bold;">BOB</span><br /><br />
@@ -107,17 +104,22 @@
 							<li>&#128273; Bobs private key</li>
 							<li>SHARED SECRET</li>
 						</ul>
-						<div id="alices_message_container" class="message_container"></div>
+						<div id="bobs_output" class="message_container"></div>
 						<br /><br />
 						<i><span id="bobs_message"></span></i>
 						<br />
 						<div id="send_to_alice"></div>
 					</td>
+					<td style="border: none">
+						<div id="bob_extra"></div>
+					</td>
 				</tr>
 			</table>
 			<br /><br />
-			<b>Algoritm for this example:</b> Simple, to encrypt a string take the letter position plus the shared secret value. To decrypt take the position minus the shared secret value. Modulus 26 (number of letters in the alphabet)
-			<a href="alphabet_mod.txt" target="_blank">Example</a>
+			<div id="algoritm_info">
+				<b>Algoritm for this example:</b> Simple, to encrypt a string take the letter position plus the shared secret value. To decrypt take the position minus the shared secret value. Modulus 26 (number of letters in the alphabet)
+				<a href="alphabet_mod.txt" target="_blank">Example</a>
+			</div>
 			<br/><br/>
 		</div>
 	</body>

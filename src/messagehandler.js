@@ -1,7 +1,7 @@
 var alphabetStringInclSpace = 'abcdefghijklmnopqrstuvwxyz0123456789 ';
 
 function connectToBob() {
-  const stringToHash = 'whatever';
+  const stringToHash = $( "#alices_message" ).text(); //whatever
   const hashOfString = '85738f8f9a7f1b04b5329c590ebcb9e425925c6d0984089c43a022de4f19c281'; //The SHA256 hash of the string "whatever"
   let sharedSecretValue = $( "#alice_hacker_shared_secret_value" ).text(); //Shared secret between Alice and hacker (Alice thinks it's Bob)
 
@@ -14,6 +14,20 @@ function connectToBob() {
   }
   console.log('hashOfString: ' + hashOfString);
   console.log('Alice encryptedCharArray: ' + aliceEncryptedCharArray.join(''));
+
+  $( "#alices_output" ).html('<b>Payload:</b><br />{plainText: "whatever", encryptedHash:'+aliceEncryptedCharArray.join('').substring(0,8)+'...}<br />');
+
+  //enrypt the hash of "whatever" with the secret 16 and send to Bob
+  sharedSecretValue = $( "#bob_hacker_shared_secret_value" ).text();
+  //HACKER TRIES TO ESTABLISH TRUST WITH BOB
+  let hackerEncryptedCharArray = [];
+  for(let i=0; i<hashOfString.length; i++) {
+    const charAlphabetIdx = alphabetStringInclSpace.indexOf(hashOfString[i]);
+    const encryptedCharPosition = (Number(charAlphabetIdx) + Number(sharedSecretValue)) % alphabetStringInclSpace.length;
+    hackerEncryptedCharArray.push(alphabetStringInclSpace[encryptedCharPosition]);
+  }
+
+  $( "#hacker_message_container" ).html('<b>Payload:</b><br />{plainText: "whatever", encryptedHash:'+hackerEncryptedCharArray.join('').substring(0,8)+'...}<br />');
 
   //########################
   sharedSecretValue = $( "#bob_hacker_shared_secret_value" ).text(); //Shared secret between hacker and Bob (Bob thinks it's Alice)
@@ -38,14 +52,16 @@ function connectToBob() {
   console.log('Bob encryptedCharArray: ' + bobEncryptedCharArray.join(''));
 
   if(bobEncryptedCharArray.join('') !== aliceEncryptedCharArray.join('')) {
-    $( "#alices_message_container" ).html('<br /><br /><b>Hey you are not Alice!</b><br />');
+    $( "#bobs_output" ).html('<br /><br /><b>Hey you are not Alice!</b><br />');
   }
+
+  $( "#bob_extra" ).html('Bobs encrypted hash (secret 16): ' + bobEncryptedCharArray.join('') + '<br/><br/> Alices encrypted hash (secret 15): ' + aliceEncryptedCharArray.join(''));
 }
 
 function sendToAlice() {
   let rawMessageToSend = $( "#bobs_message" ).text();
   let sharedSecretValue = $( "#bob_shared_secret_value" ).text();
-  let messageContainerID = "bobs_message_container";
+  let messageContainerID = "alices_output";
 
   const hackerMessageToSend = 'im bob you owe me money';
 
@@ -67,7 +83,7 @@ function sendToAlice() {
 function sendToBob() {
   let rawMessageToSend = $( "#alices_message" ).text();
   let sharedSecretValue = $( "#alice_shared_secret_value" ).text();
-  let messageContainerID = "alices_message_container";
+  let messageContainerID = "bobs_output";
 
   const hackerMessageToSend = 'im alice you are ugly';
 
