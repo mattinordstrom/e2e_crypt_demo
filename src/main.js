@@ -68,9 +68,17 @@ function mitmprevent() {
   setUrlPageParam(4);
   resetPage(true, true);
 
-  mitmInfoSetup();
+  mitmPreventInfoSetup();
 
   $( "#page_title" ).html('<h2>Prevent MITM attack example (digital signature)</h2><br/>Note: In this example plain text is sent. But digital signature can ofc. be combined with previous examples.');
+}
+
+function mitmPreventInfoSetup() {
+  $( "#generated_keys_mitmp" ).html('<b>Prime numbers (P, Q):</b> (7, 19) '+
+  '<br/><br/><b>Product (N):</b> 133 <i>(P*Q)</i>'+
+  '<br/><br/><b>Totient (T):</b> 108 <i>(P-1)*(Q-1)</i>'+
+  '<br/><br/><b>Public key (E):</b> 29 <i>prime, less than T and not factor of T</i>'+
+  '<br/><br/><b>Private key (D):</b> 41 <i>(D*E) mod T = 1</i>');
 }
 
 function mitmInfoSetup() {
@@ -131,13 +139,20 @@ function resetPage(mitm, mitmprevent) {
 
   if(mitmprevent) {
     $( "#algoritm_info" ).hide();
-    $( "#public_info" ).html('<ul><li>N</li><li>g</li><br /><li>Alices created key</li><li>Bobs created key</li><li>SHA256 is used</li><li>String "whatever"</li></ul>');
+    $( "#public_info" ).html('<ul><li>Alice public key (E): 29</li><li>Product (N): 133</li></ul>');
 
     $( "#send_to_bob" ).html('<button onclick="connectToBob()">Connect to Bob -></button>');
     $( "#send_to_alice" ).html('<button disabled>-----------</button>');
 
-    $( "#alices_message" ).html('whatever');
+    $( "#alices_message" ).html('');
     $( "#bobs_message" ).html('');
+
+    $( "#header_table_mitmp").show();
+    $( "#header_table").hide();
+
+    $( "#hacker_knowledge_info" ).html('');
+    $( "#alice_knowledge_info" ).html('<ul><li>&#128273; Private key (D): 41</li><li>RSA message: 60</li></ul>');
+    $( "#bob_knowledge_info" ).html('');
   } else {
     $( "#algoritm_info" ).show();
     $( "#public_info" ).html('<ul><li>N</li><li>g</li><br /><li>Alices created key</li><li>Bobs created key</li></ul>');
@@ -147,6 +162,12 @@ function resetPage(mitm, mitmprevent) {
 
     $( "#alices_message" ).html('bananas are yellow');
     $( "#bobs_message" ).html('an apple can be red');
+
+    $( "#header_table_mitmp").hide();
+    $( "#header_table").show();
+
+    $( "#alice_knowledge_info" ).html('<ul><li>&#128273; Alices private key</li><li>SHARED SECRET</li></ul>');
+    $( "#bob_knowledge_info" ).html('<ul><li>&#128273; Bobs private key</li><li>SHARED SECRET</li></ul>');
   }
 }
 

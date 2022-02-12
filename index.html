@@ -16,10 +16,24 @@
 		<button onclick="example1()">Example 1</button>
 		<button onclick="example2()">Example 2</button>
 		<button onclick="mitm()">MITM</button>
-		<button onclick="mitmprevent()">MITM prevent</button>
+		<button onclick="mitmprevent()">MITM prevent (RSA)</button>
 		<div id="page_title"></div>
 		<br /><br />
-		<div style="display:flex;">
+		<div id="header_table_mitmp" style="display:flex;">
+			<table width="400">
+				<tr>
+					<th>
+						Generated keys
+					</th>
+				</tr>
+				<tr height="150">
+					<td>
+						<div id="generated_keys_mitmp"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="header_table" style="display:flex;">
 			<table width="400">
 				<tr>
 					<th width="50%">
@@ -66,12 +80,7 @@
 					</td>
 					<td class="containerTD" style="height:180px">
 						<span style="font-weight: bold; color: red;">EVIL HACKER</span><br /><br />
-						<div id="hacker_knowledge_info">
-							<ul>
-								<li>Knows the created public keys</li>
-								<li>Knows how the algoritm works</li>
-							</ul>
-						</div>
+						<div id="hacker_knowledge_info"></div>
 						<br />
 						<div id="hacker_message_container" class="message_container"></div>
 					</td>
@@ -83,10 +92,7 @@
 				<tr>
 					<td class="containerTD">
 						<span style="font-weight: bold;">ALICE</span><br /><br />
-						<ul>
-							<li>&#128273; Alices private key</li>
-							<li>SHARED SECRET</li>
-						</ul>
+						<div id="alice_knowledge_info"></div>
 						<div id="alices_output" class="message_container"></div>
 						<br /><br />
 						<i><span id="alices_message"></span></i>
@@ -100,10 +106,7 @@
 					</td>
 					<td class="containerTD">
 						<span style="font-weight: bold;">BOB</span><br /><br />
-						<ul>
-							<li>&#128273; Bobs private key</li>
-							<li>SHARED SECRET</li>
-						</ul>
+						<div id="bob_knowledge_info"></div>
 						<div id="bobs_output" class="message_container"></div>
 						<br /><br />
 						<i><span id="bobs_message"></span></i>

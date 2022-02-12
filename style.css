@@ -47,3 +47,7 @@ i {
     height: 90px;
     padding: 3px;
 }
+
+#bob_extra {
+    min-width: 300px;
+}
