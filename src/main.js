@@ -70,7 +70,8 @@ function mitmprevent() {
 
   mitmPreventInfoSetup();
 
-  $( "#page_title" ).html('<h2>Prevent MITM attack example (digital signature)</h2><br/>Note: In this example plain text is sent. But digital signature can ofc. be combined with previous examples.');
+  $( "#page_title" ).html('<h2>Prevent MITM attack example (digital signature)</h2><br/>Note: In this example plain text is sent. But digital signature can ofc. be combined with previous examples.' +
+    ' (If a document is sent, something like SHA256 hash could be used.)');
 }
 
 function mitmPreventInfoSetup() {
@@ -138,7 +139,6 @@ function resetPage(mitm, mitmprevent) {
   }
 
   if(mitmprevent) {
-    $( "#algoritm_info" ).hide();
     $( "#public_info" ).html('<ul><li>Alice public key (E): 29</li><li>Product (N): 133</li></ul>');
 
     $( "#send_to_bob" ).html('<button onclick="connectToBob()">Connect to Bob -></button>');
@@ -154,7 +154,6 @@ function resetPage(mitm, mitmprevent) {
     $( "#alice_knowledge_info" ).html('<ul><li>&#128273; Private key (D): 41</li><li>RSA message: 60</li></ul>');
     $( "#bob_knowledge_info" ).html('');
   } else {
-    $( "#algoritm_info" ).show();
     $( "#public_info" ).html('<ul><li>N</li><li>g</li><br /><li>Alices created key</li><li>Bobs created key</li></ul>');
 
     $( "#send_to_bob" ).html('<button onclick="sendToBob()">Send message to Bob -></button>');

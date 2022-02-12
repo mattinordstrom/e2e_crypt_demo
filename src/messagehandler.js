@@ -2,35 +2,35 @@ var alphabetStringInclSpace = 'abcdefghijklmnopqrstuvwxyz0123456789 ';
 
 function connectToBob() {
   let rsaMessage = 60;
-  const hashOfStringHello = '2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824'; //The SHA256 hash of the string "hello"
+  const stringHello = 'hello';
 
   //ALICE ENCRYPTS
   let cipherText = 72; // (60^41) mod 133 (Message^D MOD N)
-  let aliceEncryptedHashArray = [];
-  for(let i=0; i<hashOfStringHello.length; i++) {
-    const charAlphabetIdx = alphabetStringInclSpace.indexOf(hashOfStringHello[i]);
+  let aliceEncryptedStringArray = [];
+  for(let i=0; i<stringHello.length; i++) {
+    const charAlphabetIdx = alphabetStringInclSpace.indexOf(stringHello[i]);
     const encryptedCharPosition = (Number(charAlphabetIdx) + Number(rsaMessage)) % alphabetStringInclSpace.length;
-    aliceEncryptedHashArray.push(alphabetStringInclSpace[encryptedCharPosition]);
+    aliceEncryptedStringArray.push(alphabetStringInclSpace[encryptedCharPosition]);
   }
-  const aliceEncryptedHash = aliceEncryptedHashArray.join('');
-  $( "#alices_output" ).html('<b>Payload:</b><br />{encryptedHash: '+aliceEncryptedHash.substring(0,8)+'..., cipherText:'+cipherText+', plainText: "hello"}<br />');
+  const aliceEncryptedString = aliceEncryptedStringArray.join('');
+  $( "#alices_output" ).html('<b>Payload:</b><br />{encryptedString: '+aliceEncryptedString.substring(0,8)+'..., cipherText:'+cipherText+', plainText: "hello"}<br />');
 
   //BOB DECRYPTS
   cipherText = 72; //This is what Alice sent
   const calcRsaMessage = 60; // (72^29) mod 133 (Cipher^E MOD N)
   let decryptedArray = [];
-  for(i=0; i<aliceEncryptedHashArray.length; i++) {
-    const charAlphabetIdx = alphabetStringInclSpace.indexOf(aliceEncryptedHashArray[i]);
+  for(i=0; i<aliceEncryptedStringArray.length; i++) {
+    const charAlphabetIdx = alphabetStringInclSpace.indexOf(aliceEncryptedStringArray[i]);
     const decryptedCharPosition = (((charAlphabetIdx - Number(calcRsaMessage)) % alphabetStringInclSpace.length) + alphabetStringInclSpace.length) % alphabetStringInclSpace.length;
     decryptedArray.push(alphabetStringInclSpace[decryptedCharPosition]);
   }
-  const bobDecryptedHash = decryptedArray.join('');
-  $( "#bobs_output" ).html('Decrypted cipher: ' + calcRsaMessage + '<br/><br/>Decrypted hash: ' + bobDecryptedHash.substring(0,8)+'...<br/><br/>Hash of "hello": '+hashOfStringHello.substring(0,8)+'...');
+  const bobDecryptedString = decryptedArray.join('');
+  $( "#bobs_output" ).html('Decrypted cipher: ' + calcRsaMessage + '<br/><br/>Decrypted string: ' + bobDecryptedString + '<br/><br/>Plain text: hello');
 
   $( "#bob_extra" ).html('(Alice encrypt: (60^41) MOD 133 = 72)' + 
-  '<br/><br/> Bob decrypt: (72^29) MOD 133 = 60<br/><br/><b>HASHES MATCH, YOU ARE ALICE!</b>');
+  '<br/><br/> Bob decrypt: (72^29) MOD 133 = 60<br/><br/><b>STRINGS MATCH, YOU ARE ALICE!</b>');
 
-  $( "#hacker_message_container" ).html('<br />Hacker doesnt know D (41). If Bob uses hackers pub key the hashes wouldnt match. Cannot change message!');
+  $( "#hacker_message_container" ).html('<br />Hacker doesnt know D (41). If Bob uses hackers pub key the strings wouldnt match. Cannot change message!');
 }
 
 function sendToAlice() {
